@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutorial Setup 9Router untuk Codex GUI di macOS & Windows</title>
+  <style>
+    :root {
+      --bg: #0f1115;
+      --card: #171a21;
+      --card-2: #1f2430;
+      --text: #e7eaf0;
+      --muted: #a7afbe;
+      --accent: #ff7a45;
+      --accent-2: #60a5fa;
+      --border: #2b3140;
+      --code: #0b0d11;
+      --green: #4ade80;
+      --yellow: #facc15;
+      --red: #fb7185;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    header {
+      padding: 56px 24px 32px;
+      background:
+        radial-gradient(circle at top left, rgba(255, 122, 69, 0.18), transparent 32%),
+        radial-gradient(circle at top right, rgba(96, 165, 250, 0.14), transparent 30%),
+        linear-gradient(180deg, #171a21 0%, #0f1115 100%);
+      border-bottom: 1px solid var(--border);
+    }
+
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+    }
+
+    h1, h2, h3 {
+      line-height: 1.25;
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: 1.7rem;
+      margin-top: 48px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      margin-top: 28px;
+      color: #ffffff;
+    }
+
+    p, li {
+      color: var(--muted);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .subtitle {
+      max-width: 780px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin: 0;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      margin: 22px 0;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+    }
+
+    .warning {
+      border-color: rgba(251, 113, 133, 0.4);
+      background: rgba(251, 113, 133, 0.08);
+    }
+
+    .success {
+      border-color: rgba(74, 222, 128, 0.35);
+      background: rgba(74, 222, 128, 0.07);
+    }
+
+    .note {
+      border-color: rgba(250, 204, 21, 0.35);
+      background: rgba(250, 204, 21, 0.07);
+    }
+
+    .os-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .os-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .os-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px 20px;
+      background: var(--card-2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .os-card-header h3 {
+      margin: 0;
+    }
+
+    .os-card-body {
+      padding: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .mini-card {
+      background: var(--card-2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .mini-card strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      color: #ffd8c7;
+    }
+
+    pre {
+      overflow-x: auto;
+      background: var(--code);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+
+    pre code {
+      color: #e8edf7;
+      white-space: pre;
+      font-size: 0.92rem;
+    }
+
+    .toc {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px;
+      margin: 28px 0;
+    }
+
+    .toc ol {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    .toc li {
+      margin: 8px 0;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .status.green {
+      background: rgba(74, 222, 128, 0.13);
+      color: var(--green);
+    }
+
+    .status.yellow {
+      background: rgba(250, 204, 21, 0.13);
+      color: var(--yellow);
+    }
+
+    .status.red {
+      background: rgba(251, 113, 133, 0.13);
+      color: var(--red);
+    }
+
+    .pill {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      background: rgba(255,255,255,0.03);
+      white-space: nowrap;
+    }
+
+    .split-label {
+      display: inline-block;
+      margin-bottom: 8px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 20px;
+      color: var(--muted);
+      text-align: center;
+      background: #0b0d11;
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+        color: #111827;
+      }
+
+      header, .card, .toc, .mini-card, .os-card, .os-card-header, pre {
+        background: #ffffff;
+        color: #111827;
+        box-shadow: none;
+      }
+
+      p, li, .subtitle {
+        color: #374151;
+      }
+
+      pre, .card, .toc, .mini-card, .os-card {
+        border: 1px solid #d1d5db;
+      }
+
+      pre code, code {
+        color: #111827;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Tutorial Setup 9Router Proxy untuk Codex GUI di macOS & Windows</h1>
+      <p class="subtitle">
+        Panduan ini menjelaskan cara setting 9Router dari awal sampai bisa dipakai sebagai endpoint
+        untuk Codex GUI, Codex Desktop, VS Code Extension, atau Cursor di macOS dan Windows.
+      </p>
+
+      <div class="badge-row">
+        <span class="badge">Endpoint: <code>https://domainkamu.com/v1</code></span>
+        <span class="badge">Combo: <code>openai</code></span>
+        <span class="badge">Model: <code>cx/gpt-5.5</code></span>
+        <span class="badge">Provider: <code>codex</code></span>
+        <span class="badge">OS: macOS + Windows</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="card warning">
+      <h2 style="margin-top: 0;">Penting: Jangan Upload Token Asli</h2>
+      <p>
+        Jangan pernah membagikan file backup 9Router mentah ke GitHub, Gist, forum, atau chat publik.
+        File backup bisa berisi <code>accessToken</code>, <code>refreshToken</code>,
+        <code>idToken</code>, API key, email akun, dan account ID.
+      </p>
+      <p>
+        Tutorial ini memakai placeholder <code>domainkamu.com</code> dan <code>sk-xxxxxxxxxxxxxxxx</code>.
+        Ganti dengan domain dan API key milik kamu sendiri saat praktik.
+      </p>
+    </section>
+
+    <nav class="toc">
+      <h2 style="margin-top: 0;">Daftar Isi</h2>
+      <ol>
+        <li><a href="#arsitektur">Gambaran Arsitektur</a></li>
+        <li><a href="#ringkasan">Ringkasan Setting</a></li>
+        <li><a href="#install">Install dan Jalankan 9Router</a></li>
+        <li><a href="#provider">Login Provider Codex</a></li>
+        <li><a href="#combo">Buat Combo openai</a></li>
+        <li><a href="#apikey">Buat API Key</a></li>
+        <li><a href="#settings">Setting Strategy dan Token Saver</a></li>
+        <li><a href="#test-model">Test Model dari Terminal</a></li>
+        <li><a href="#test-responses">Test Responses API</a></li>
+        <li><a href="#codex-config">Config Codex GUI: macOS dan Windows</a></li>
+        <li><a href="#env">Set API Key: macOS dan Windows</a></li>
+        <li><a href="#restart">Restart Codex GUI / VS Code / Cursor</a></li>
+        <li><a href="#troubleshooting">Troubleshooting</a></li>
+        <li><a href="#deploy-github">Deploy ke GitHub Pages</a></li>
+      </ol>
+    </nav>
+
+    <section id="arsitektur">
+      <h2>1. Gambaran Arsitektur</h2>
+      <p>Alur request-nya seperti ini:</p>
+
+      <pre><code>Codex GUI / Codex Extension
+        ↓
+https://domainkamu.com/v1
+        ↓
+9Router Proxy
+        ↓
+Combo: openai
+        ↓
+Model: cx/gpt-5.5
+        ↓
+Provider: codex OAuth account</code></pre>
+
+      <div class="grid">
+        <div class="mini-card">
+          <strong>Domain</strong>
+          <code>https://domainkamu.com/v1</code>
+          <p>Endpoint publik 9Router kamu.</p>
+        </div>
+        <div class="mini-card">
+          <strong>Combo</strong>
+          <code>openai</code>
+          <p>Nama combo yang dipanggil oleh Codex.</p>
+        </div>
+        <div class="mini-card">
+          <strong>Model</strong>
+          <code>cx/gpt-5.5</code>
+          <p>Model utama yang dipasang di dalam combo.</p>
+        </div>
+        <div class="mini-card">
+          <strong>Provider</strong>
+          <code>codex</code>
+          <p>Provider 9Router yang login via OAuth.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ringkasan">
+      <h2>2. Ringkasan Setting</h2>
+
+      <pre><code>Provider connection:
+- provider  : codex
+- authType  : oauth
+- status    : active
+- strategy  : round-robin
+- sticky    : 1
+
+Combo:
+- name      : openai
+- model     : cx/gpt-5.5
+- strategy  : round-robin
+
+Endpoint:
+- base_url  : https://domainkamu.com/v1
+- env_key   : NINEROUTER_API_KEY
+
+Token saver:
+- RTK       : enabled
+- Caveman   : disabled
+
+Codex config:
+- wire_api             : responses
+- supports_websockets  : false
+- stream retries       : 10
+- stream timeout       : 600000 ms</code></pre>
+    </section>
+
+    <section id="install">
+      <h2>3. Install dan Jalankan 9Router</h2>
+
+      <div class="os-grid">
+        <article class="os-card">
+          <div class="os-card-header">
+            <h3>macOS</h3>
+            <span class="pill">Terminal / zsh</span>
+          </div>
+          <div class="os-card-body">
+            <p>Install 9Router secara global:</p>
+            <pre><code>npm install -g 9router</code></pre>
+
+            <p>Cek versi:</p>
+            <pre><code>9router --version</code></pre>
+
+            <p>Jalankan 9Router:</p>
+            <pre><code>9router</code></pre>
+
+            <p>Dashboard lokal:</p>
+            <pre><code>http://localhost:20128/dashboard</code></pre>
+
+            <p>Endpoint lokal:</p>
+            <pre><code>http://localhost:20128/v1</code></pre>
+          </div>
+        </article>
+
+        <article class="os-card">
+          <div class="os-card-header">
+            <h3>Windows</h3>
+            <span class="pill">PowerShell</span>
+          </div>
+          <div class="os-card-body">
+            <p>Install 9Router secara global:</p>
+            <pre><code>npm install -g 9router</code></pre>
+
+            <p>Cek versi:</p>
+            <pre><code>9router --version</code></pre>
+
+            <p>Jalankan 9Router:</p>
+            <pre><code>9router</code></pre>
+
+            <p>Dashboard lokal:</p>
+            <pre><code>http://localhost:20128/dashboard</code></pre>
+
+            <p>Endpoint lokal:</p>
+            <pre><code>http://localhost:20128/v1</code></pre>
+          </div>
+        </article>
+      </div>
+
+      <h3>Jika memakai domain / reverse proxy</h3>
+      <p>Contoh dashboard dan endpoint publik:</p>
+
+      <pre><code>https://domainkamu.com/dashboard
+https://domainkamu.com/v1</code></pre>
+
+      <h3>Update 9Router</h3>
+
+      <div class="os-grid">
+        <article class="os-card">
+          <div class="os-card-header">
+            <h3>macOS</h3>
+            <span class="pill">Terminal</span>
+          </div>
+          <div class="os-card-body">
+            <pre><code>npm i -g 9router
+pkill -f 9router
+9router</code></pre>
+          </div>
+        </article>
+
+        <article class="os-card">
+          <div class="os-card-header">
+            <h3>Windows</h3>
+            <span class="pill">PowerShell</span>
+          </div>
+          <div class="os-card-body">
+            <pre><code>npm i -g 9router
+
+# Tutup proses 9Router jika masih jalan,
+# lalu jalankan ulang:
+9router</code></pre>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="provider">
+      <h2>4. Login Provider Codex di 9Router</h2>
+
+      <p>Buka dashboard:</p>
+
+      <pre><code>https://domainkamu.com/dashboard</code></pre>
+
+      <p>Masuk ke menu:</p>
+
+      <pre><code>Providers</code></pre>
+
+      <p>Tambahkan provider baru:</p>
+
+      <pre><code>Provider : codex
+Auth     : OAuth</code></pre>
+
+      <p>Login menggunakan akun ChatGPT/Codex kamu.</p>
+
+      <div class="card success">
+        <h3 style="margin-top: 0;">Target Status</h3>
+        <p>
+          Provider harus aktif dengan status:
+          <span class="status green">active</span>
+        </p>
+
+        <pre><code>provider : codex
+authType : oauth
+status   : active</code></pre>
+      </div>
+
+      <p>
+        Jika punya beberapa akun Codex, kamu bisa menambahkan beberapa provider connection.
+        9Router dapat memakai fallback atau round-robin antar akun tersebut.
+      </p>
+    </section>
+
+    <section id="combo">
+      <h2>5. Buat Combo openai</h2>
+
+      <p>Masuk ke menu:</p>
+
+      <pre><code>Combos</code></pre>
+
+      <p>Klik:</p>
+
+      <pre><code>Create Combo</code></pre>
+
+      <p>Isi combo seperti ini:</p>
+
+      <pre><code>Combo name : openai
+Model      : cx/gpt-5.5</code></pre>
+
+      <p>Hasilnya kurang lebih:</p>
+
+      <pre><code>{
+  "name": "openai",
+  "models": [
+    "cx/gpt-5.5"
+  ]
+}</code></pre>
+
+      <div class="card note">
+        <h3 style="margin-top: 0;">Kenapa nama combo-nya openai?</h3>
+        <p>
+          Karena Codex nanti cukup diarahkan ke model bernama <code>openai</code>.
+          Jika suatu saat ingin mengganti model utama atau menambah fallback, cukup ubah combo di 9Router,
+          tanpa perlu mengubah config Codex di Mac atau Windows.
+        </p>
+      </div>
+    </section>
+
+    <section id="apikey">
+      <h2>6. Buat API Key di 9Router</h2>
+
+      <p>Masuk ke menu:</p>
+
+      <pre><code>Endpoint</code></pre>
+
+      <p>Pada bagian <strong>API Keys</strong>, klik:</p>
+
+      <pre><code>Create Key</code></pre>
+
+      <p>Isi nama key:</p>
+
+      <pre><code>openai</code></pre>
+
+      <p>Contoh format API key:</p>
+
+      <pre><code>sk-xxxxxxxxxxxxxxxx</code></pre>
+
+      <p>Jika ingin endpoint wajib API key, aktifkan:</p>
+
+      <pre><code>Require API key: ON</code></pre>
+
+      <p>Request ke 9Router nantinya harus memakai header:</p>
+
+      <pre><code>Authorization: Bearer API_KEY_KAMU</code></pre>
+    </section>
+
+    <section id="settings">
+      <h2>7. Setting Strategy dan Token Saver</h2>
+
+      <h3>Provider Strategy</h3>
+      <p>Untuk provider <code>codex</code>, gunakan:</p>
+
+      <pre><code>Provider          : codex
+Fallback strategy : round-robin
+Sticky limit      : 1</code></pre>
+
+      <h3>Combo Strategy</h3>
+      <p>Untuk combo <code>openai</code>, gunakan:</p>
+
+      <pre><code>Combo             : openai
+Fallback strategy : round-robin</code></pre>
+
+      <h3>Token Saver</h3>
+      <p>Rekomendasi setting:</p>
+
+      <pre><code>Compress tool output / RTK : ON
+Compress LLM output        : OFF</code></pre>
+
+      <ul>
+        <li><code>RTK</code> membantu menghemat token dari output tool seperti <code>git diff</code>, <code>ls</code>, <code>tree</code>, log, dan grep.</li>
+        <li><code>Caveman</code> sebaiknya dimatikan agar jawaban code, error, dan warning tetap natural.</li>
+      </ul>
+    </section>
+
+    <section id="test-model">
+      <h2>8. Test Model dari Terminal</h2>
+
+      <div class="os-grid">
+        <article class="os-card">
+          <div class="os-card-header">
+            <h3>macOS</h3>
+            <span class="pill">Terminal</span>
+          </div>
+          <div class="os-card-body">
+            <span class="split-label">Set API key sementara</span>
+            <pre><code>export NINEROUTER_API_KEY="ISI_API_KEY_9ROUTER_KAMU"</code></pre>
+
+            <span class="split-label">Cek daftar model</span>
+            <pre><code>curl https://domainkamu.com/v1/models \
+  -H "Authorization: Bearer $NINEROUTER_API_KEY" | python3 -m json.tool</code></pre>
+          </div>
+        </article>
+
+        <article class="os-card">
+          <div class="os-card-header">
+            <h3>Windows</h3>
+            <span class="pill">PowerShell</span>
+          </div>
+          <div class="os-card-body">
+            <span class="split-label">Set API key sementara</span>
+            <pre><code>$env:NINEROUTER_API_KEY="ISI_API_KEY_9ROUTER_KAMU"</code></pre>
+
+            <span class="split-label">Cek daftar model</span>
+            <pre><code>curl.exe https://domainkamu.com/v1/models `
+  -H "Authorization: Bearer $env:NINEROUTER_API_KEY" | python -m json.tool</code></pre>
+          </div>
+        </article>
+      </div>
+
+      <p>Output yang diharapkan minimal ada:</p>
+
+      <pre><code>{
+  "id": "openai",
+  "object": "model",
+  "owned_by": "combo"
+}</code></pre>
+
+      <p>Dan model langsung:</p>
+
+      <pre><code>{
+  "id": "cx/gpt-5.5",
+  "object": "model",
+  "owned_by": "cx"
+}</code></pre>
+    </section>
+
+    <section id="test-responses">
+      <h2>9. Test Responses API</h2>
+
+      <p>
+        Codex GUI membutuhkan endpoint yang kompatibel dengan Responses API.
+        Karena itu kita perlu memastikan endpoint <code>/v1/responses</code> bisa menerima request.
+      </p>
+
+      <div class="os-grid">
+        <article class="os-card">
+          <div class="os-card-header">
+            <h3>macOS</h3>
+            <span class="pill">Terminal</span>
+          </div>
+          <div class="os-card-body">
+            <pre><code>curl -s https://domainkamu.com/v1/responses \
+  -H "Authorization: Bearer $NINEROUTER_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "openai",
+    "input": "jawab satu kata: ok"
+  }' | python3 -m json.tool</code></pre>
+          </div>
+        </article>
+
+        <article class="os-card">
+          <div class="os-card-header">
+            <h3>Windows</h3>
+            <span class="pill">PowerShell</span>
+          </div>
+          <div class="os-card-body">
+            <pre><code>$body = @{
+  model = "openai"
+  input = "jawab satu kata: ok"
+} | ConvertTo-Json
+
+curl.exe -s https://domainkamu.com/v1/responses `
+  -H "Authorization: Bearer $env:NINEROUTER_API_KEY" `
+  -H "Content-Type: application/json" `
+  -d $body | python -m json.tool</code></pre>
+          </div>
+        </article>
+      </div>
+
+      <p>Jika berhasil, akan muncul JSON response dari model.</p>
+
+      <p>Jika muncul error seperti ini:</p>
+
+      <pre><code>404 not found
+unsupported endpoint
+Cannot POST /v1/responses</code></pre>
+
+      <p>
+        Berarti endpoint <code>/v1/responses</code> belum kompatibel.
+        Jika <code>/v1/models</code> berhasil tetapi Codex GUI stuck di reconnecting,
+        biasanya masalahnya ada di <code>/v1/responses</code> atau streaming.
+      </p>
+    </section>
+
+    <section id="codex-config">
+      <h2>10. Config Codex GUI: macOS dan Windows</h2>
+
+      <div class="os-grid">
+        <article class="os-card">
+          <div class="os-card-header">
+            <h3>macOS</h3>
+            <span class="pill">~/.codex/config.toml</span>
+          </div>
+          <div class="os-card-body">
+            <p>Codex membaca konfigurasi dari:</p>
+            <pre><code>~/.codex/config.toml</code></pre>
+
+            <p>Buat config:</p>
+            <pre><code>mkdir -p ~/.codex
+
+cat &gt; ~/.codex/config.toml &lt;&lt;'EOF'
+model = "openai"
+model_provider = "ninerouter"
+model_reasoning_summary = "none"
+model_supports_reasoning_summaries = false
+
+[model_providers.ninerouter]
+name = "9Router"
+base_url = "https://domainkamu.com/v1"
+env_key = "NINEROUTER_API_KEY"
+wire_api = "responses"
+supports_websockets = false
+stream_idle_timeout_ms = 600000
+stream_max_retries = 10
+EOF
+
+chmod 600 ~/.codex/config.toml</code></pre>
+          </div>
+        </article>
+
+        <article class="os-card">
+          <div class="os-card-header">
+            <h3>Windows</h3>
+            <span class="pill">%USERPROFILE%\.codex\config.toml</span>
+          </div>
+          <div class="os-card-body">
+            <p>Codex membaca konfigurasi dari:</p>
+            <pre><code>%USERPROFILE%\.codex\config.toml</code></pre>
+
+            <p>Buat config via PowerShell:</p>
+            <pre><code>New-Item -ItemType Directory -Force "$env:USERPROFILE\.codex" | Out-Null
+
+@'
+model = "openai"
+model_provider = "ninerouter"
+model_reasoning_summary = "none"
+model_supports_reasoning_summaries = false
+
+[model_providers.ninerouter]
+name = "9Router"
+base_url = "https://domainkamu.com/v1"
+env_key = "NINEROUTER_API_KEY"
+wire_api = "responses"
+supports_websockets = false
+stream_idle_timeout_ms = 600000
+stream_max_retries = 10
+'@ | Set-Content -Encoding UTF8 "$env:USERPROFILE\.codex\config.toml"</code></pre>
+          </div>
+        </article>
+      </div>
+
+      <h3>Penjelasan Config</h3>
+
+      <pre><code>model = "openai"</code></pre>
+      <p>Menggunakan combo <code>openai</code> dari 9Router.</p>
+
+      <pre><code>model_provider = "ninerouter"</code></pre>
+      <p>Menggunakan custom provider bernama <code>ninerouter</code>.</p>
+
+      <pre><code>base_url = "https://domainkamu.com/v1"</code></pre>
+      <p>Endpoint 9Router.</p>
+
+      <pre><code>env_key = "NINEROUTER_API_KEY"</code></pre>
+      <p>Nama environment variable untuk API key.</p>
+
+      <pre><code>wire_api = "responses"</code></pre>
+      <p>Memaksa Codex memakai Responses API.</p>
+
+      <pre><code>supports_websockets = false</code></pre>
+      <p>Agar Codex tidak memaksa websocket.</p>
+
+      <pre><code>stream_idle_timeout_ms = 600000
+stream_max_retries = 10</code></pre>
+      <p>Membantu mengurangi masalah reconnect saat streaming.</p>
+    </section>
+
+    <section id="env">
+      <h2>11. Set API Key: macOS dan Windows</h2>
+
+      <div class="os-grid">
+        <article class="os-card">
+          <div class="os-card-header">
+            <h3>macOS</h3>
+            <span class="pill">launchctl + zsh</span>
+          </div>
+          <div class="os-card-body">
+            <p>
+              Aplikasi GUI di macOS sering tidak membaca environment variable dari <code>.zshrc</code>.
+              Karena itu set API key memakai <code>launchctl</code>.
+            </p>
+
+            <pre><code>launchctl setenv NINEROUTER_API_KEY "ISI_API_KEY_9ROUTER_KAMU"</code></pre>
+
+            <p>Supaya Terminal juga membaca API key:</p>
+
+            <pre><code>grep -q 'NINEROUTER_API_KEY' ~/.zshrc || echo 'export NINEROUTER_API_KEY="ISI_API_KEY_9ROUTER_KAMU"' &gt;&gt; ~/.zshrc
+source ~/.zshrc</code></pre>
+
+            <p>Cek:</p>
+            <pre><code>echo $NINEROUTER_API_KEY</code></pre>
+          </div>
+        </article>
+
+        <article class="os-card">
+          <div class="os-card-header">
+            <h3>Windows</h3>
+            <span class="pill">User Environment Variable</span>
+          </div>
+          <div class="os-card-body">
+            <p>
+              Untuk Windows GUI, set environment variable level user agar terbaca oleh VS Code,
+              Cursor, atau aplikasi Codex setelah direstart.
+            </p>
+
+            <pre><code>[Environment]::SetEnvironmentVariable(
+  "NINEROUTER_API_KEY",
+  "ISI_API_KEY_9ROUTER_KAMU",
+  "User"
+)</code></pre>
+
+            <p>Set juga untuk sesi PowerShell saat ini:</p>
+
+            <pre><code>$env:NINEROUTER_API_KEY="ISI_API_KEY_9ROUTER_KAMU"</code></pre>
+
+            <p>Cek:</p>
+            <pre><code>echo $env:NINEROUTER_API_KEY</code></pre>
+
+            <div class="card note">
+              <h3 style="margin-top: 0;">Catatan Windows</h3>
+              <p>
+                Setelah memakai <code>[Environment]::SetEnvironmentVariable</code>,
+                tutup semua jendela VS Code/Cursor/Codex dan buka ulang agar env baru terbaca.
+              </p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="restart">
+      <h2>12. Restart Codex GUI / VS Code / Cursor</h2>
+
+      <div class="os-grid">
+        <article class="os-card">
+          <div class="os-card-header">
+            <h3>macOS</h3>
+            <span class="pill">Terminal</span>
+          </div>
+          <div class="os-card-body">
+            <h3>VS Code</h3>
+            <pre><code>osascript -e 'quit app "Visual Studio Code"'
+open -a "Visual Studio Code"</code></pre>
+
+            <h3>Cursor</h3>
+            <pre><code>osascript -e 'quit app "Cursor"'
+open -a "Cursor"</code></pre>
+          </div>
+        </article>
+
+        <article class="os-card">
+          <div class="os-card-header">
+            <h3>Windows</h3>
+            <span class="pill">PowerShell</span>
+          </div>
+          <div class="os-card-body">
+            <h3>VS Code</h3>
+            <pre><code>taskkill /IM Code.exe /F
+Start-Process "Code"</code></pre>
+
+            <h3>Cursor</h3>
+            <pre><code>taskkill /IM Cursor.exe /F
+Start-Process "Cursor"</code></pre>
+
+            <p>
+              Jika command <code>Start-Process "Code"</code> atau <code>Start-Process "Cursor"</code>
+              tidak jalan, buka aplikasinya manual dari Start Menu.
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <h3>Test di Codex GUI</h3>
+
+      <pre><code>jawab singkat, kamu pakai model apa?</code></pre>
+
+      <p>Atau:</p>
+
+      <pre><code>ini pakai engine laravel versi berapa ya?</code></pre>
+
+      <p>Jika berhasil, Codex akan menjawab normal.</p>
+    </section>
+
+    <section id="troubleshooting">
+      <h2>13. Troubleshooting</h2>
+
+      <h3>A. <code>/v1/models</code> berhasil tapi Codex GUI reconnecting</h3>
+
+      <p>Gejala:</p>
+
+      <pre><code>Reconnecting... 2/5
+Reconnecting... 3/5
+Thinking</code></pre>
+
+      <p>Penyebab umum:</p>
+
+      <ul>
+        <li><code>/v1/responses</code> belum kompatibel.</li>
+        <li>Streaming response putus.</li>
+        <li>Websocket dipakai padahal proxy tidak support.</li>
+        <li>API key tidak terbaca oleh aplikasi GUI.</li>
+      </ul>
+
+      <p>Pastikan config memakai:</p>
+
+      <pre><code>wire_api = "responses"
+supports_websockets = false
+stream_idle_timeout_ms = 600000
+stream_max_retries = 10</code></pre>
+
+      <div class="os-grid">
+        <article class="os-card">
+          <div class="os-card-header">
+            <h3>macOS</h3>
+            <span class="pill">Cek ulang</span>
+          </div>
+          <div class="os-card-body">
+            <pre><code>cat ~/.codex/config.toml
+echo $NINEROUTER_API_KEY</code></pre>
+          </div>
+        </article>
+
+        <article class="os-card">
+          <div class="os-card-header">
+            <h3>Windows</h3>
+            <span class="pill">Cek ulang</span>
+          </div>
+          <div class="os-card-body">
+            <pre><code>Get-Content "$env:USERPROFILE\.codex\config.toml"
+echo $env:NINEROUTER_API_KEY</code></pre>
+          </div>
+        </article>
+      </div>
+
+      <h3>B. Hapus / ganti API key</h3>
+
+      <div class="os-grid">
+        <article class="os-card">
+          <div class="os-card-header">
+            <h3>macOS</h3>
+            <span class="pill">launchctl</span>
+          </div>
+          <div class="os-card-body">
+            <pre><code>launchctl unsetenv NINEROUTER_API_KEY
+launchctl setenv NINEROUTER_API_KEY "API_KEY_BARU"</code></pre>
+          </div>
+        </article>
+
+        <article class="os-card">
+          <div class="os-card-header">
+            <h3>Windows</h3>
+            <span class="pill">PowerShell</span>
+          </div>
+          <div class="os-card-body">
+            <pre><code>[Environment]::SetEnvironmentVariable("NINEROUTER_API_KEY", $null, "User")
+[Environment]::SetEnvironmentVariable("NINEROUTER_API_KEY", "API_KEY_BARU", "User")
+$env:NINEROUTER_API_KEY="API_KEY_BARU"</code></pre>
+          </div>
+        </article>
+      </div>
+
+      <h3>C. Jika memakai endpoint lokal</h3>
+
+      <p>Jika Codex dan 9Router berjalan di komputer yang sama, bisa pakai endpoint lokal.</p>
+
+      <div class="os-grid">
+        <article class="os-card">
+          <div class="os-card-header">
+            <h3>macOS</h3>
+            <span class="pill">config.toml</span>
+          </div>
+          <div class="os-card-body">
+            <pre><code>base_url = "http://127.0.0.1:20128/v1"</code></pre>
+
+            <pre><code>curl http://127.0.0.1:20128/v1/models \
+  -H "Authorization: Bearer $NINEROUTER_API_KEY" | python3 -m json.tool</code></pre>
+          </div>
+        </article>
+
+        <article class="os-card">
+          <div class="os-card-header">
+            <h3>Windows</h3>
+            <span class="pill">config.toml</span>
+          </div>
+          <div class="os-card-body">
+            <pre><code>base_url = "http://127.0.0.1:20128/v1"</code></pre>
+
+            <pre><code>curl.exe http://127.0.0.1:20128/v1/models `
+  -H "Authorization: Bearer $env:NINEROUTER_API_KEY" | python -m json.tool</code></pre>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="final-config">
+      <h2>14. Config Final yang Work</h2>
+
+      <p>Isi final <code>config.toml</code> sama untuk macOS dan Windows. Yang berbeda hanya lokasi file.</p>
+
+      <pre><code>model = "openai"
+model_provider = "ninerouter"
+model_reasoning_summary = "none"
+model_supports_reasoning_summaries = false
+
+[model_providers.ninerouter]
+name = "9Router"
+base_url = "https://domainkamu.com/v1"
+env_key = "NINEROUTER_API_KEY"
+wire_api = "responses"
+supports_websockets = false
+stream_idle_timeout_ms = 600000
+stream_max_retries = 10</code></pre>
+
+      <div class="grid">
+        <div class="mini-card">
+          <strong>macOS path</strong>
+          <code>~/.codex/config.toml</code>
+        </div>
+        <div class="mini-card">
+          <strong>Windows path</strong>
+          <code>%USERPROFILE%\.codex\config.toml</code>
+        </div>
+      </div>
+    </section>
+
+    <section id="deploy-github">
+      <h2>15. Deploy ke GitHub Pages</h2>
+
+      <p>Buat repository baru, misalnya:</p>
+
+      <pre><code>9router-codex-tutorial</code></pre>
+
+      <p>Buat file:</p>
+
+      <pre><code>index.html</code></pre>
+
+      <p>Paste semua isi HTML tutorial ini ke file tersebut, lalu commit.</p>
+
+      <h3>Aktifkan GitHub Pages</h3>
+
+      <pre><code>Repository → Settings → Pages
+Source     → Deploy from a branch
+Branch     → main
+Folder     → / root
+Save</code></pre>
+
+      <p>URL akan menjadi:</p>
+
+      <pre><code>https://USERNAME.github.io/9router-codex-tutorial/</code></pre>
+
+      <h3>Custom Domain</h3>
+
+      <p>Jika ingin memakai subdomain, contoh:</p>
+
+      <pre><code>docs.domainkamu.com</code></pre>
+
+      <p>DNS:</p>
+
+      <pre><code>Type  : CNAME
+Name  : docs
+Value : USERNAME.github.io</code></pre>
+
+      <p>Lalu di GitHub Pages, isi custom domain:</p>
+
+      <pre><code>docs.domainkamu.com</code></pre>
+    </section>
+
+    <section class="card warning">
+      <h2 style="margin-top: 0;">Catatan Keamanan</h2>
+      <p>Jangan upload file backup 9Router mentah karena bisa berisi:</p>
+
+      <pre><code>accessToken
+refreshToken
+idToken
+API key
+email akun
+account id</code></pre>
+
+      <p>Jika file backup atau API key sudah pernah terekspos publik:</p>
+
+      <ol>
+        <li>Hapus Gist/file publik.</li>
+        <li>Buat API key baru di 9Router.</li>
+        <li>Hapus API key lama.</li>
+        <li>Re-login provider Codex jika perlu.</li>
+        <li>Update env macOS atau Windows.</li>
+      </ol>
+
+      <div class="os-grid">
+        <article class="os-card">
+          <div class="os-card-header">
+            <h3>macOS</h3>
+            <span class="pill">rotate env</span>
+          </div>
+          <div class="os-card-body">
+            <pre><code>launchctl setenv NINEROUTER_API_KEY "API_KEY_BARU"</code></pre>
+          </div>
+        </article>
+
+        <article class="os-card">
+          <div class="os-card-header">
+            <h3>Windows</h3>
+            <span class="pill">rotate env</span>
+          </div>
+          <div class="os-card-body">
+            <pre><code>[Environment]::SetEnvironmentVariable(
+  "NINEROUTER_API_KEY",
+  "API_KEY_BARU",
+  "User"
+)</code></pre>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      Tutorial setup 9Router Proxy untuk Codex GUI di macOS dan Windows.
+      Gunakan <code>domainkamu.com</code> sebagai placeholder domain.
+    </p>
+  </footer>
+</body>
+</html>
